@@ -190,6 +190,37 @@ Avalible methods
 - ``get_trade_datetime()``
 - ``refresh()``
 
+Get commodity data
+^^^^^^^^^^^^^^^^^
+
+Example: Coffee 'C' Futures (``KC=F``)
+
+.. code:: python
+
+    >>> from yahoo_finance import Commodity
+    >>> coffee = Commodity('KC=F')
+    >>> print coffee.get_price()
+    '128.45'
+
+Refresh data from market
+
+.. code:: python
+
+    >>> coffee.refresh()
+    >>> print coffee.get_price()
+    '128.65'
+
+Avalible methods
+
+- ``get_price()``
+- ``get_change()``
+- ``get_volume()``
+- ``get_days_high()``
+- ``get_days_low()``
+- ``get_year_high()``
+- ``get_year_low()``
+- ``refresh()``
+
 Requirements
 ------------
 

@@ -5,7 +5,7 @@ import pytz
 
 __author__ = 'Lukasz Banasiak'
 __version__ = '1.4.0'
-__all__ = ['Currency', 'Share']
+__all__ = ['Currency', 'Share', 'Commodity']
 
 
 def edt_to_utc(date, mask='%m/%d/%Y %I:%M%p'):
@@ -167,6 +167,39 @@ class Currency(Base):
 
     def get_trade_datetime(self):
         return self.data_set['DateTimeUTC']
+
+class Commodity(Base):
+
+    def __init__(self, symbol):
+        super(Commodity, self).__init__(symbol)
+        self._table = 'quote'
+        self._key = 'symbol'
+        self.refresh()
+
+    def _fetch(self):
+        data = super(Commodity, self)._fetch()
+        return data
+
+    def get_price(self):
+        return self.data_set['LastTradePriceOnly']
+
+    def get_change(self):
+        return self.data_set['Change']
+
+    def get_volume(self):
+        return self.data_set['Volume']
+
+    def get_days_high(self):
+        return self.data_set['DaysHigh']
+
+    def get_days_low(self):
+        return self.data_set['DaysLow']
+
+    def get_year_high(self):
+        return self.data_set['YearHigh']
+
+    def get_year_low(self):
+        return self.data_set['YearLow']
 
 
 class Share(Base):

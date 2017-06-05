@@ -6,7 +6,7 @@ if sys.version_info < (2, 7):
 else:
     from unittest import main as test_main, SkipTest, TestCase
 
-from yahoo_finance import Currency, Share, edt_to_utc, get_date_range
+from yahoo_finance import Currency, Share, Commodity, edt_to_utc, get_date_range
 
 
 class TestShare(TestCase):
@@ -100,6 +100,16 @@ class TestCurrency(TestCase):
                 raise SkipTest("datetime format checking requires the %z directive.")
             else:
                 raise
+
+class TestCommodity(TestCase):
+
+    def setUp(self):
+        self.kc = Commodity('KC=F')
+
+    def test_kc(self):
+        # assert these are float-like
+        float(self.kc.get_price())
+
 
 if __name__ == "__main__":
     test_main()
